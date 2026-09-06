@@ -1,4 +1,4 @@
-import { clear, el, escapeHtml, pct, severityBars, timeAgo } from "./format.js";
+import { clear, el, escapeHtml, iconHtml, pct, severityBars, timeAgo } from "./format.js";
 import { filtersActive, LIST_PREVIEW, setFilters, setListView, state } from "./state.js";
 
 export class Sidebar {
@@ -85,7 +85,7 @@ export class Sidebar {
         onClick: () => this.#toggleCategory(category.key),
       });
       button.innerHTML = `
-        <span class="cat__glyph" aria-hidden="true">${category.icon}</span>
+        <span class="cat__glyph" aria-hidden="true">${iconHtml(category.icon)}</span>
         <span class="cat__label">${escapeHtml(category.label)}</span>
         <span class="cat__n tnum">${category.hazard_count}</span>
         <span class="cat__reports tnum">${category.report_count} rep</span>`;
@@ -152,7 +152,7 @@ export class Sidebar {
       onClick: () => this.onSelect?.(hazard.id),
     });
     row.innerHTML = `
-      <span class="hzrow__glyph" aria-hidden="true">${hazard.icon}</span>
+      <span class="hzrow__glyph" aria-hidden="true">${iconHtml(hazard.icon)}</span>
       <span class="hzrow__main">
         <span class="hzrow__title">
           ${escapeHtml(hazard.label)}

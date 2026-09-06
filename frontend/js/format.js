@@ -94,6 +94,15 @@ export function escapeHtml(value) {
     .replaceAll("'", "&#39;");
 }
 
+export function iconHtml(icon, extraClass = "") {
+  const value = String(icon ?? "");
+  const cls = extraClass ? `icon-img ${extraClass}` : "icon-img";
+  if (value.startsWith("/") || /^https?:\/\//.test(value)) {
+    return `<img class="${cls}" src="${escapeHtml(value)}" alt="" />`;
+  }
+  return escapeHtml(value);
+}
+
 export function clear(node) {
   if (!node) return node;
   while (node.firstChild) node.removeChild(node.firstChild);

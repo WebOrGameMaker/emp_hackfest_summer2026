@@ -37,7 +37,7 @@ CATEGORIES: Tuple[Category, ...] = (
     Category(
         key="fallen_tree",
         label="Fallen Tree",
-        icon="\U0001f333",
+        icon="/assets/icons/fallen-tree.png",
         blurb="Trees or large branches blocking a road or path.",
         cluster_radius_m=60.0,
         cluster_window_hours=6.0,
@@ -73,7 +73,7 @@ CATEGORIES: Tuple[Category, ...] = (
     Category(
         key="road_obstruction",
         label="Road Obstruction",
-        icon="\U0001f6a7",
+        icon="/assets/icons/road-obstruction.png",
         blurb="Debris, stalled vehicles, or objects blocking the way.",
         cluster_radius_m=60.0,
         cluster_window_hours=6.0,
@@ -98,7 +98,7 @@ CATEGORIES: Tuple[Category, ...] = (
     Category(
         key="flooding",
         label="Flooding",
-        icon="\U0001f4a7",
+        icon="/assets/icons/flooding.png",
         blurb="Standing water covering a street or underpass.",
         cluster_radius_m=150.0,
         cluster_window_hours=12.0,
@@ -128,7 +128,7 @@ CATEGORIES: Tuple[Category, ...] = (
     Category(
         key="traffic_signal",
         label="Broken Traffic Signal",
-        icon="\U0001f6a6",
+        icon="/assets/icons/traffic-signal.png",
         blurb="A traffic signal that is dark, flashing, or not working.",
         cluster_radius_m=40.0,
         cluster_window_hours=24.0,
@@ -151,7 +151,7 @@ CATEGORIES: Tuple[Category, ...] = (
     Category(
         key="pavement_damage",
         label="Road Damage",
-        icon="\U0001f573",
+        icon="/assets/icons/pavement-damage.png",
         blurb="Potholes, sinkholes, or failing pavement.",
         cluster_radius_m=30.0,
         cluster_window_hours=24.0,
@@ -173,7 +173,7 @@ CATEGORIES: Tuple[Category, ...] = (
     Category(
         key="fire_smoke",
         label="Fire / Smoke",
-        icon="\U0001f525",
+        icon="/assets/icons/fire-smoke.png",
         blurb="Active fire, smoke, or smoldering material.",
         cluster_radius_m=200.0,
         cluster_window_hours=2.0,
@@ -200,7 +200,7 @@ CATEGORIES: Tuple[Category, ...] = (
     Category(
         key="streetlight",
         label="Broken Streetlight",
-        icon="\U0001f4a1",
+        icon="/assets/icons/streetlight.png",
         blurb="A streetlight that is out or damaged.",
         cluster_radius_m=25.0,
         cluster_window_hours=48.0,
@@ -222,7 +222,7 @@ CATEGORIES: Tuple[Category, ...] = (
     Category(
         key="other",
         label="Other Hazard",
-        icon="\u26a0\ufe0f",
+        icon="/assets/icons/other.png",
         blurb="A public-safety concern that does not fit the types above.",
         cluster_radius_m=50.0,
         cluster_window_hours=6.0,

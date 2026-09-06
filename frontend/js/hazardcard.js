@@ -1,6 +1,6 @@
 import {
   accessWord, animateNumber, clear, clockTime, confidenceWord, el, escapeHtml,
-  locationWord, pct, severityChip, timeAgo,
+  iconHtml, locationWord, pct, severityChip, timeAgo,
 } from "./format.js";
 
 const root = () => document.getElementById("detail-root");
@@ -35,7 +35,7 @@ export function renderCard(hazard, { onClose, animateFrom = null } = {}) {
   const breakdown = hazard.confidence_breakdown;
   card.innerHTML = `
     <div class="detail__head">
-      <div class="detail__glyph" aria-hidden="true">${hazard.icon}</div>
+      <div class="detail__glyph" aria-hidden="true">${iconHtml(hazard.icon)}</div>
       <div class="detail__titles">
         <div class="detail__title">${escapeHtml(hazard.label)}</div>
         <div class="detail__place">${escapeHtml(hazard.place)}</div>
@@ -195,7 +195,7 @@ function timeline(hazard) {
               ${report.text ? `<q>${escapeHtml(report.text)}</q>` : '<span class="dim">Photo report with no description</span>'}
             </div>
             <span class="tl__norm">
-              <span aria-hidden="true">${hazard.icon}</span>
+              <span aria-hidden="true">${iconHtml(hazard.icon)}</span>
               classified as ${escapeHtml(hazard.label)} · ${pct(analysis.confidence || 0)} confidence
             </span>
             ${

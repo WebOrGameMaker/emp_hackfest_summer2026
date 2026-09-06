@@ -1,5 +1,5 @@
 import { api } from "./api.js";
-import { accessWord, clear, distance, el, escapeHtml, locationWord, pct, severityChip } from "./format.js";
+import { accessWord, clear, distance, el, escapeHtml, iconHtml, locationWord, pct, severityChip } from "./format.js";
 import { BASEMAPS } from "./map.js";
 import { closeModal, openModal } from "./modal.js";
 import { applyTileTheme, getTheme, onThemeChange } from "./theme.js";
@@ -59,7 +59,6 @@ export function openReportFlow({ meta, scenarios, onSubmitted }) {
       </p>`;
     const photo = el("button", { class: "choice__btn", type: "button" });
     photo.innerHTML = `
-      <span class="choice__icon" aria-hidden="true">\u{1F4F8}</span>
       <span class="choice__title">Upload a photo</span>
       <span class="choice__hint">
         We’ll identify the hazard and whether the road or sidewalk is blocked.
@@ -70,10 +69,9 @@ export function openReportFlow({ meta, scenarios, onSubmitted }) {
     });
     const text = el("button", { class: "choice__btn", type: "button" });
     text.innerHTML = `
-      <span class="choice__icon" aria-hidden="true">\u{1F4DD}</span>
       <span class="choice__title">Describe the hazard</span>
       <span class="choice__hint">
-        Write what you see in your own words, including whether it blocks cars or people walking if you can.
+        Write what you see, including whether it blocks cars or people walking if you can
       </span>`;
     text.addEventListener("click", () => {
       draft.mode = "text";
@@ -85,7 +83,7 @@ export function openReportFlow({ meta, scenarios, onSubmitted }) {
     body.append(el("p", {
       class: "dim",
       style: "margin-top:var(--s5);font-size:11.5px;line-height:1.5;text-align:center",
-      text: "Never report an in-progress emergency here. Call 911 instead \u2014 HazardMap is an awareness tool.",
+      text: "Never report an in-progress emergency here. Call 911 instead. HazardMap is an awareness tool.",
     }));
     host.setBody(body);
     host.setFooter(null);
@@ -104,7 +102,7 @@ export function openReportFlow({ meta, scenarios, onSubmitted }) {
     } else {
       body.append(section(
         "What do you see?",
-        "Write what you see in your own words, including whether it blocks cars or people walking if you can.",
+        "Write what you see, including whether it blocks cars or people walking if you can",
         textArea(true),
       ));
     }
@@ -194,7 +192,7 @@ export function openReportFlow({ meta, scenarios, onSubmitted }) {
       button.innerHTML = `
         <img src="${escapeHtml(scenario.image)}" alt="" />
         <span class="scene__cap">
-          <span aria-hidden="true">${scenario.icon}</span>
+          <span aria-hidden="true">${iconHtml(scenario.icon)}</span>
           ${escapeHtml(scenario.label)}
         </span>`;
       button.addEventListener("click", async () => {
@@ -359,7 +357,7 @@ export function openReportFlow({ meta, scenarios, onSubmitted }) {
     body.append(el("div", { class: "eyebrow", text: "We identified" }));
     const hero = el("div", { class: "result__hero" });
     hero.innerHTML = `
-      <div class="result__glyph" aria-hidden="true">${categoryIcon(analysis.category)}</div>
+      <div class="result__glyph" aria-hidden="true">${iconHtml(categoryIcon(analysis.category))}</div>
       <div style="flex:1;min-width:0">
         <div class="result__label">${escapeHtml(categoryLabel(analysis.category))}</div>
         <div class="detail__row" style="margin-top:7px">
@@ -437,7 +435,7 @@ export function openReportFlow({ meta, scenarios, onSubmitted }) {
       for (const match of [...merging, ...nearMisses].slice(0, 4)) {
         const item = el("div", { class: `nearby__item${match.would_merge ? " nearby__item--merge" : ""}` });
         item.innerHTML = `
-          <span class="nearby__glyph" aria-hidden="true">${match.icon}</span>
+          <span class="nearby__glyph" aria-hidden="true">${iconHtml(match.icon)}</span>
           <span style="min-width:0">
             <span style="font-size:12.5px;font-weight:600">
               ${match.report_count} report${match.report_count === 1 ? "" : "s"} · ${distance(match.distance_m)} away · ${pct(match.confidence)}
@@ -497,7 +495,7 @@ export function openReportFlow({ meta, scenarios, onSubmitted }) {
   }
 
   function categoryIcon(key) {
-    return categoryMeta(key)?.icon || "\u26a0\ufe0f";
+    return categoryMeta(key)?.icon || "/assets/icons/other.png";
   }
 
   renderChoice();

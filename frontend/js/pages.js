@@ -1,4 +1,4 @@
-import { escapeHtml } from "./format.js";
+import { escapeHtml, iconHtml } from "./format.js";
 
 export function renderClusterTable(meta) {
   const table = document.getElementById("cluster-table");
@@ -7,7 +7,7 @@ export function renderClusterTable(meta) {
     .map(
       (category) =>
         `<div class="kv__row">
-           <span class="kv__k">${category.icon} ${escapeHtml(category.label)}</span>
+           <span class="kv__k">${iconHtml(category.icon, "icon-img--inline")} ${escapeHtml(category.label)}</span>
            <span class="kv__v tnum">${category.cluster_radius_m}m · ${category.cluster_window_hours}h</span>
          </div>`
     )

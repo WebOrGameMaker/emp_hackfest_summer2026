@@ -1,4 +1,4 @@
-import { SEVERITY_BARS, escapeHtml, pct } from "./format.js";
+import { SEVERITY_BARS, escapeHtml, iconHtml, pct } from "./format.js";
 import { applyTileTheme } from "./theme.js";
 
 export const BASEMAPS = [
@@ -75,7 +75,7 @@ export class HazardMap {
         corroborated ? " hz-pin--corroborated" : ""
       }${isNew ? " hz-pin--new" : ""}" data-hazard="${escapeHtml(hazard.id)}">
           <span class="hz-pin__ring"></span>
-          <span class="hz-pin__glyph">${hazard.icon}</span>
+          <span class="hz-pin__glyph">${iconHtml(hazard.icon)}</span>
           <span class="hz-pin__count tnum">${hazard.report_count}</span>
           <span class="hz-pin__bars">${barHtml}</span>
         </div>`,

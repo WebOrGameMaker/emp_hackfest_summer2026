@@ -32,17 +32,15 @@
 .brand__mark {
   display: grid;
   place-items: center;
-  width: 30px;
-  height: 30px;
+  width: 36px;
+  height: 36px;
   flex: none;
-  border-radius: 8px;
-  background: var(--accent);
-  color: var(--on-accent);
 }
 
-.brand__mark svg {
-  width: 18px;
-  height: 18px;
+.brand__mark img {
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
 }
 
 .brand__name {

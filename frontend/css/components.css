@@ -162,10 +162,32 @@
   cursor: pointer;
 }
 
+.icon-img {
+  display: block;
+  width: 1.15em;
+  height: 1.15em;
+  object-fit: contain;
+  pointer-events: none;
+}
+
+.icon-img--inline {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  vertical-align: -3px;
+}
+
 .hz-pin__glyph {
+  display: grid;
+  place-items: center;
   font-size: 19px;
   line-height: 1;
   filter: saturate(1.1);
+}
+
+.hz-pin__glyph .icon-img {
+  width: 22px;
+  height: 22px;
 }
 
 .hz-pin__ring {
@@ -326,10 +348,17 @@
 }
 
 .cat__glyph {
+  display: grid;
+  place-items: center;
   width: 22px;
   font-size: 15px;
   text-align: center;
   flex: none;
+}
+
+.cat__glyph .icon-img {
+  width: 18px;
+  height: 18px;
 }
 
 .cat__label {
@@ -480,8 +509,15 @@ input[type="range"]::-moz-range-thumb {
 }
 
 .hzrow__glyph {
+  display: grid;
+  place-items: center;
   font-size: 17px;
   text-align: center;
+}
+
+.hzrow__glyph .icon-img {
+  width: 18px;
+  height: 18px;
 }
 
 .hzrow__main {
@@ -579,6 +615,11 @@ input[type="range"]::-moz-range-thumb {
   border-radius: var(--r-md);
   background: var(--surface-3);
   font-size: 22px;
+}
+
+.detail__glyph .icon-img {
+  width: 28px;
+  height: 28px;
 }
 
 .detail__titles {
@@ -702,6 +743,9 @@ input[type="range"]::-moz-range-thumb {
 }
 
 .kv__k {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   color: var(--text-muted);
 }
 
@@ -901,6 +945,11 @@ input[type="range"]::-moz-range-thumb {
   font-style: italic;
 }
 
+.tl__norm .icon-img {
+  width: 12px;
+  height: 12px;
+}
+
 .tl__norm {
   display: inline-flex;
   align-items: center;
@@ -1057,11 +1106,6 @@ input[type="range"]::-moz-range-thumb {
   transform: translateY(-2px);
 }
 
-.choice__icon {
-  font-size: 26px;
-  line-height: 1;
-}
-
 .choice__title {
   font-size: 14px;
   font-weight: 650;
@@ -1135,6 +1179,11 @@ input[type="range"]::-moz-range-thumb {
   padding: 7px var(--s2);
   font-size: 11.5px;
   font-weight: 550;
+}
+
+.scene__cap .icon-img {
+  width: 14px;
+  height: 14px;
 }
 
 .dropzone {
@@ -1225,6 +1274,11 @@ input[type="range"]::-moz-range-thumb {
   font-size: 28px;
 }
 
+.result__glyph .icon-img {
+  width: 36px;
+  height: 36px;
+}
+
 .result__label {
   font-size: 19px;
   font-weight: 700;
@@ -1254,7 +1308,14 @@ input[type="range"]::-moz-range-thumb {
 }
 
 .nearby__glyph {
+  display: grid;
+  place-items: center;
   font-size: 16px;
+}
+
+.nearby__glyph .icon-img {
+  width: 18px;
+  height: 18px;
 }
 
 .nearby__why {

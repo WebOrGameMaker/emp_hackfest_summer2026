@@ -1,32 +1,32 @@
 # HazardMap
 
-**Turning what people see into actionable safety data.**
+**Human-AI report system for safety data**
 
-A public safety map built on one idea: the hard part of crowdsourced hazard
-reporting is not collecting reports, it is deciding which reports describe the
-*same real-world thing*. HazardMap normalizes messy human input — a photo or a
-sentence — into a structured hazard record, then aggregates records that
-describe one event into a single marker with an explainable confidence score.
+A public safety map constructed on the idea that the hard part of crowdsourced hazard
+reporting is not collecting reports, but it is deciding which reports describe the
+same real-world thing. HazardMap normalizes messy human input, such as a photo or a
+sentence, into a structured record. Then, it aggregates records that
+describe one event into a single marker with a confidence score.
 
 Twelve people reporting one fallen tree should produce one hazard at high
-confidence, not twelve pins.
+confidence, not twelve different pins.
 
 ---
 
-## Run it
+## How to Run
 
 ```bash
 ./run.sh
 ```
 
-Then open <http://localhost:8000>.
+Then open [http://localhost:8000](http://localhost:8000).
 
 The script creates a virtualenv, installs pinned dependencies, seeds the demo
 database if it is empty, and serves the app. Nothing else is required: no
 Node.js, no build step, no map API key, no AI key.
 
 Requires Python 3.9 or newer. Dependencies are pinned to the last releases that
-still support 3.9, since that is what ships with macOS.
+still support 3.9.
 
 ### Optional: run against a real model
 
@@ -43,6 +43,8 @@ The seam is `backend/ai/base.py::HazardAnalyzer`.
 
 ---
 
+
+
 ## How it works
 
 ```
@@ -57,15 +59,19 @@ citizen observation ──> AI normalization ──> structured hazard record
 
 A new report joins an existing hazard when the normalized category matches, the
 distance is inside that category's radius, and the hazard was last confirmed
-inside its time window. Otherwise it opens a new hazard.
+inside its time window (spatial + temporal clustering). Otherwise it opens a new hazard.
 
 Evidence accumulates in log-odds. A single report is capped near 72% and
-nothing ever exceeds 97%. The interface says "corroborated", never "verified".
+nothing ever exceeds 97% (logically, one report always needs to be taken with a grain of
+salt. Similarly, multiple reports don't mean that something is 100% certain). 
+The interface says "corroborated", never "verified," for this reason.
 
 The in-app **How it works** tab has the per-category thresholds, the confidence
 breakdown, and the system's limits.
 
 ---
+
+
 
 ## Layout
 
@@ -99,12 +105,14 @@ API: `GET /api/meta`, `/api/hazards`, `/api/hazards/{id}`, `/api/scenarios`,
 
 ---
 
+
+
 ## Known limits
 
-Deliberately out of scope: authentication, user accounts, moderation, live
+Deliberately out of scope: authentication, user accounts (login system), moderation, live
 traffic and weather feeds, and any build tooling.
 
 Photos are base64 in SQLite. Fine for a prototype, not for production.
 
 HazardMap is decision support and awareness. It is not a dispatch system and
-must not replace emergency services.
+must not replace emergency services. It has no ability to report emergencies as of current.
