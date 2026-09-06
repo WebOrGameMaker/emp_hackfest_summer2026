@@ -1459,6 +1459,23 @@ input[type="range"]::-moz-range-thumb {
   font-style: italic;
 }
 
+.prose a,
+.prose a:link,
+.prose a:visited {
+  color: var(--text);
+  text-decoration: none;
+  border-bottom: 1px dotted var(--line-strong);
+}
+
+.prose a:hover {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+
+.prose .note {
+  margin-top: var(--s3);
+}
+
 .prose li {
   position: relative;
   padding-left: var(--s4);

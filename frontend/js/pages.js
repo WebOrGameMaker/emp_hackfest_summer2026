@@ -14,9 +14,18 @@ export function renderClusterTable(meta) {
     .join("");
 }
 
+export function renderAiStatus(meta) {
+  const box = document.getElementById("ai-status");
+  if (!box || !meta?.ai) return;
+  const label = meta.ai.is_demo ? "Built-in analyzer" : "Hosted model";
+  const note = meta.ai.note || "";
+  box.hidden = !note;
+  box.innerHTML = `<strong>${escapeHtml(label)}</strong><br>${escapeHtml(note)}`;
+}
+
 export function viewFromHash() {
   const hash = (location.hash || "#map").slice(1);
-  if (hash === "how-it-works" || hash === "about") return hash;
+  if (hash === "how-it-works" || hash === "how-ai-works" || hash === "about") return hash;
   return "map";
 }
 

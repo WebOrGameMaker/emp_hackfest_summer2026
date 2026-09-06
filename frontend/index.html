@@ -45,6 +45,7 @@
         <nav class="nav" aria-label="Primary">
           <a class="nav__link" href="#map" data-nav="map" aria-current="page">Map</a>
           <a class="nav__link" href="#how-it-works" data-nav="how-it-works">How it works</a>
+          <a class="nav__link" href="#how-ai-works" data-nav="how-ai-works">The AI</a>
           <a class="nav__link" href="#about" data-nav="about">About</a>
         </nav>
 
@@ -221,6 +222,12 @@
               <span class="pipeline__arrow" aria-hidden="true">&rarr;</span>
               <span class="pipeline__node">Map</span>
             </div>
+            <p>
+              Classification is the AI step: it turns a photo or a sentence
+              into that standard record.
+              <a href="#how-ai-works">How the AI works</a> explains that part
+              in more detail.
+            </p>
 
             <h2>How two reports become one hazard</h2>
             <p>
@@ -253,6 +260,148 @@
           </article>
         </main>
 
+        <!-- how the AI works -->
+        <main class="page" id="view-how-ai-works" data-view="how-ai-works" hidden>
+          <article class="prose">
+            <h1>How the AI works</h1>
+            <p>
+              When you send a report, a classifier reads your photo, your description, or both, and turns that into one standard record. 
+              Grouping reports and scoring confidence use fixed rules, not a model. (Find those rules in the <a href="#how-it-works">How it works</a> section.)
+            </p>
+
+            <h2>What the classifier does</h2>
+            <div class="pipeline">
+              <span class="pipeline__node">Photo or words</span>
+              <span class="pipeline__arrow" aria-hidden="true">&rarr;</span>
+              <span class="pipeline__node">Classifier</span>
+              <span class="pipeline__arrow" aria-hidden="true">&rarr;</span>
+              <span class="pipeline__node">Standard record</span>
+            </div>
+            <p>
+              The record always uses the same fields: hazard type, how serious it looks, whether the path is physically blocked, and whether cars and people on foot can get through. 
+              It also writes one plain sentence so similar reports read alike, and a short list of what it noticed.
+            </p>
+            <p>
+              The map pin is not used to guess the type. Location is used
+              later, when HazardMap decides whether your report joins an
+              existing marker.
+            </p>
+
+            <h2>Fixed list of obstructions/hazards</h2>
+            <p>
+              The classifier must pick one of the eight types already on the
+              map, and it cannot invent a new category.
+            </p>
+            <ul>
+              <li>Fallen Tree</li>
+              <li>Road Obstruction</li>
+              <li>Flooding</li>
+              <li>Broken Traffic Signal</li>
+              <li>Road Damage</li>
+              <li>Fire / Smoke</li>
+              <li>Broken Streetlight</li>
+              <li>Other Hazard</li>
+            </ul>
+
+            <h2>When a hosted model is connected</h2>
+            <p>
+              If this copy of HazardMap has a key for a hosted model, your
+              photo and your description are sent together to a model that
+              can look at a picture and read writing. The model fills in the
+              same standard record the rest of the site already uses.
+            </p>
+            <p>
+              It is told to describe what the report supports, not to
+              confirm that the hazard is real. It must pick one of the eight
+              types, or Other if none fit. It then fills in how serious the
+              scene looks, whether the path is physically blocked, and
+              whether cars and people on foot can get through.
+            </p>
+            <p>
+              It also writes one plain sentence and a short list of what it
+              noticed. What it saw in the photo, or which phrases it used in the description. It is never allowed to reach 100% certainty from the photo or the description, only 97%.  
+            </p>
+            <p>
+              If the hosted model cannot be reached, the built-in analyzer
+              is used instead, and the report notes that it is using the built-in analyzer.
+            </p>
+
+            <h2>When no key is set (the built-in analyzer)</h2>
+            <p>
+              With no API key, nothing is sent to a hosted model (since there is none). A built-in
+              analyzer runs on the server instead. It does not look at a
+              new picture the way a hosted model can, but it works from familiar
+              phrases, known demo scenes, and, sometimes, the filename of an
+              upload.
+            </p>
+            <p>
+              Words:
+              The built-in analyzer does not understand a sentence the way a
+              hosted model does. It scans the description for familiar
+              phrases for each type, such as “tree down,” and skips
+              misleading ones: a cat stuck in a tree is not a fallen tree.
+              It picks the best match. If nothing is clear enough, it leaves
+              the type unclassified and asks for a clearer description.
+              Other words nudge how serious it looks, where it is (road,
+              sidewalk, intersection), and whether cars or people can get
+              through. Very short notes get a lower certainty.
+            </p>
+            <p>
+              Photos:
+              The built-in analyzer cannot look at the pixels of a new
+              picture you upload. There are three cases:
+            </p>
+            <ul>
+              <li>The built-in demo scenes, such as a fallen tree, a flooded underpass, a dark signal, and a few others, already have a prepared reading.</li>
+              <li>A new upload is not seen. If the filename itself contains hazard words, that filename is treated like a short description, and certainty is kept way lower.</li>
+              <li>A photo with no useful filename and no description is left unclassified, with a note to add words.</li>
+            </ul>
+            <p>
+              Photo and words together:
+              Each is classified on its own, then compared. If they agree on
+              the type, certainty goes up. If they disagree, the stronger
+              guess is kept and certainty is reduced. When the description
+              is clear enough, its severity is preferred, because a sentence
+              can say the road is closed when a picture cannot.
+            </p>
+
+            <h2>What stays the same either way (API key or no key)</h2>
+            <p>
+              Both paths produce the same kind of record and must use the
+              same eight types of obstructions/hazards. After classification, the same non-AI rules
+              decide whether your report joins an existing marker and how
+              the map confidence score is built. (See <a href="#how-it-works">How it works</a> for those rules.)
+            </p>
+            <h2>
+              Your current ai status:
+            </h2>
+            <div class="note" id="ai-status" hidden></div>
+
+            <h2>What happens next</h2>
+            <p>
+              After classification, HazardMap asks whether this report is
+              about a hazard already on the map. It must match the same type, be nearby, and
+              recently reported. If so, your report joins that marker, and if not, a new marker opens.
+            </p>
+            <p>
+              The confidence number on each hazard is not the classifier's
+              score. It comes from how many different people reported it,
+              whether photos were included, how well the reports agree, and
+              how recent they are. A single reporter is kept well below
+              certainty, and nothing ever reaches 100%. (See <a href="#how-it-works">How it works</a> or the README for those rules).
+            </p>
+
+            <h2>What the AI will not do</h2>
+            <ul class="prose--limits">
+              <li>It does not confirm that a hazard is real, current, or still there.</li>
+              <li>It does not call 911, dispatch anyone, or alert authorities.</li>
+              <li>It does not use the map pin to guess the type.</li>
+              <li>It does not learn from older reports. Each report is read on its own.</li>
+              <li>It does not reach 100% certainty. Classification confidence is capped, and the map score is capped again.</li>
+            </ul>
+          </article>
+        </main>
+
         <!-- about -->
         <main class="page" id="view-about" data-view="about" hidden>
           <article class="prose">
@@ -271,7 +420,7 @@
               smoke, and similar hazards. Please note that it is not an emergency service, and call 911 for emergencies.
             </p>
             <p>
-              The system is open source and free to use. It is not a commercial product.
+              The system is open source and free to use under the MIT license (as are all the other files in the repository).
             </p>
           </article>
         </main>

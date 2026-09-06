@@ -3,7 +3,7 @@ import { pct } from "./format.js";
 import { closeCard, openHazardId, renderCard } from "./hazardcard.js";
 import { HazardMap } from "./map.js";
 import { closeModal, isOpen as modalIsOpen } from "./modal.js";
-import { renderClusterTable, showView, viewFromHash } from "./pages.js";
+import { renderAiStatus, renderClusterTable, showView, viewFromHash } from "./pages.js";
 import { openReportFlow } from "./report.js";
 import { Sidebar } from "./sidebar.js";
 import { setState, state, subscribe, totals } from "./state.js";
@@ -62,7 +62,10 @@ async function refreshMeta() {
 
 function render() {
   const { hazards, meta } = state;
-  if (meta) renderClusterTable(meta);
+  if (meta) {
+    renderClusterTable(meta);
+    renderAiStatus(meta);
+  }
   if (!mapViewVisible()) return;
   if (meta) sidebar?.renderCategories(meta.categories);
   sidebar?.renderHazards(hazards);
