@@ -1,0 +1,106 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 560" width="800" height="560" role="img" aria-label="Illustration of a traffic signal with no illuminated lamps at a four-way intersection">
+  <defs>
+    <linearGradient id="sd-sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2c3644"/>
+      <stop offset="1" stop-color="#5d6b7b"/>
+    </linearGradient>
+    <linearGradient id="sd-road" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#464b52"/>
+      <stop offset="1" stop-color="#272b30"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="800" height="560" fill="url(#sd-sky)"/>
+
+  <!-- buildings, lit windows to establish that power is on elsewhere -->
+  <g fill="#333c47">
+    <rect x="0" y="90" width="150" height="220"/>
+    <rect x="640" y="60" width="160" height="250"/>
+  </g>
+  <g fill="#d8c98a" opacity="0.65">
+    <rect x="20" y="118" width="14" height="20"/><rect x="52" y="118" width="14" height="20"/>
+    <rect x="20" y="158" width="14" height="20"/><rect x="84" y="158" width="14" height="20"/>
+    <rect x="662" y="92" width="14" height="20"/><rect x="700" y="92" width="14" height="20"/>
+    <rect x="662" y="134" width="14" height="20"/><rect x="738" y="134" width="14" height="20"/>
+    <rect x="700" y="176" width="14" height="20"/>
+  </g>
+
+  <!-- intersection -->
+  <rect x="0" y="310" width="800" height="250" fill="url(#sd-road)"/>
+  <rect x="330" y="310" width="150" height="250" fill="#3d4249"/>
+  <rect x="0" y="286" width="800" height="24" fill="#8d97a1"/>
+  <rect x="330" y="286" width="150" height="24" fill="#3d4249"/>
+
+  <!-- crosswalk bars -->
+  <g fill="#dfe5ea" opacity="0.8">
+    <rect x="340" y="326" width="22" height="66"/>
+    <rect x="374" y="326" width="22" height="66"/>
+    <rect x="408" y="326" width="22" height="66"/>
+    <rect x="442" y="326" width="22" height="66"/>
+  </g>
+  <g fill="#dfe5ea" opacity="0.55">
+    <rect x="120" y="470" width="66" height="20"/>
+    <rect x="120" y="504" width="66" height="20"/>
+    <rect x="614" y="470" width="66" height="20"/>
+    <rect x="614" y="504" width="66" height="20"/>
+  </g>
+
+  <!-- centreline -->
+  <g fill="#d8c65c" opacity="0.85">
+    <rect x="40" y="438" width="60" height="8"/>
+    <rect x="200" y="438" width="60" height="8"/>
+    <rect x="560" y="438" width="60" height="8"/>
+    <rect x="704" y="438" width="60" height="8"/>
+  </g>
+
+  <!-- mast arm -->
+  <rect x="196" y="150" width="16" height="160" fill="#4d545c"/>
+  <rect x="180" y="300" width="48" height="14" rx="3" fill="#3f454c"/>
+  <rect x="204" y="150" width="220" height="13" fill="#4d545c"/>
+
+  <!-- signal head, every lamp dark -->
+  <g>
+    <rect x="378" y="156" width="66" height="152" rx="10" fill="#252a30" stroke="#171b20" stroke-width="4"/>
+    <circle cx="411" cy="192" r="19" fill="#3a3f46"/>
+    <circle cx="411" cy="232" r="19" fill="#3a3f46"/>
+    <circle cx="411" cy="272" r="19" fill="#3a3f46"/>
+    <!-- visors -->
+    <g fill="#1e2328">
+      <path d="M388 172 h46 v8 h-46 z"/>
+      <path d="M388 212 h46 v8 h-46 z"/>
+      <path d="M388 252 h46 v8 h-46 z"/>
+    </g>
+  </g>
+
+  <!-- second dark head on the far side -->
+  <g opacity="0.8">
+    <rect x="596" y="196" width="10" height="114" fill="#4d545c"/>
+    <rect x="580" y="150" width="42" height="98" rx="7" fill="#252a30" stroke="#171b20" stroke-width="3"/>
+    <circle cx="601" cy="174" r="12" fill="#3a3f46"/>
+    <circle cx="601" cy="199" r="12" fill="#3a3f46"/>
+    <circle cx="601" cy="224" r="12" fill="#3a3f46"/>
+  </g>
+
+  <!-- cars hesitating at the stop line -->
+  <g>
+    <rect x="120" y="392" width="112" height="42" rx="12" fill="#5a6472"/>
+    <rect x="146" y="378" width="62" height="26" rx="9" fill="#6d7887"/>
+    <circle cx="148" cy="438" r="12" fill="#1d2126"/>
+    <circle cx="212" cy="438" r="12" fill="#1d2126"/>
+    <rect x="222" y="404" width="14" height="8" rx="3" fill="#e2b45c" opacity="0.9"/>
+  </g>
+  <g>
+    <rect x="560" y="470" width="122" height="46" rx="13" fill="#4e5866"/>
+    <rect x="588" y="454" width="68" height="28" rx="10" fill="#616c7a"/>
+    <circle cx="590" cy="520" r="13" fill="#1d2126"/>
+    <circle cx="660" cy="520" r="13" fill="#1d2126"/>
+    <rect x="550" y="484" width="14" height="9" rx="3" fill="#d95f47" opacity="0.9"/>
+  </g>
+
+  <rect width="800" height="560" fill="#0a1017" opacity="0.22"/>
+
+  <g font-family="ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600">
+    <rect x="18" y="516" width="152" height="28" rx="6" fill="#0b1017" opacity="0.72"/>
+    <text x="30" y="535" fill="#c7d0da" letter-spacing="1.4">DEMO SCENE</text>
+  </g>
+</svg>

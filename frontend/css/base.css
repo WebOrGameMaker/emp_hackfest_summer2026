@@ -1,0 +1,292 @@
+/* tokens, reset, typography */
+
+:root {
+  color-scheme: light;
+
+  /* surfaces */
+  --bg: #f7f4ed;
+  --surface-1: #faf8f3;
+  --surface-2: #f0ebe0;
+  --surface-3: #e8e1d3;
+  --surface-raised: #fffdf8;
+  --surface-glass: rgba(250, 248, 243, 0.94);
+
+  /* lines */
+  --line: #e4ddd0;
+  --line-strong: #d4cbb8;
+  --btn-hover-line: #c4b8a4;
+
+  /* type */
+  --text: #1c1915;
+  --text-muted: #6b6458;
+  --text-dim: #8a8274;
+
+  /* brand */
+  --accent: #7a4528;
+  --accent-hover: #5c331c;
+  --accent-dim: #5c331c;
+  --accent-wash: rgba(122, 69, 40, 0.1);
+  --accent-line: rgba(122, 69, 40, 0.32);
+  --on-accent: #faf6f0;
+  --focus: #7a4528;
+
+  /* overlays */
+  --overlay: rgba(28, 25, 21, 0.45);
+  --map-bg: #e8e1d3;
+  --preview-clear: rgba(28, 25, 21, 0.72);
+  --cue-bg: rgba(28, 25, 21, 0.04);
+  --spinner-track: rgba(28, 25, 21, 0.18);
+
+  /* severity */
+  --sev-high: #ef6d3d;
+  --sev-high-wash: rgba(239, 109, 61, 0.14);
+  --sev-high-line: rgba(239, 109, 61, 0.32);
+  --sev-moderate: #c48a10;
+  --sev-moderate-wash: rgba(196, 138, 16, 0.13);
+  --sev-moderate-line: rgba(196, 138, 16, 0.3);
+  --sev-low: #3d7eb0;
+  --sev-low-wash: rgba(61, 126, 176, 0.13);
+  --sev-low-line: rgba(61, 126, 176, 0.3);
+
+  --danger: #c2474c;
+  --ok: #3d8f5f;
+  --toast-error-bg: #f8e4e4;
+  --toast-error-text: #8f2d32;
+  --toast-error-line: rgba(194, 71, 76, 0.4);
+  --toast-ok-line: rgba(61, 143, 95, 0.45);
+
+  /* geometry */
+  --r-sm: 6px;
+  --r-md: 10px;
+  --r-lg: 14px;
+  --r-xl: 20px;
+
+  /* space */
+  --s1: 4px;
+  --s2: 8px;
+  --s3: 12px;
+  --s4: 16px;
+  --s5: 20px;
+  --s6: 28px;
+  --s7: 40px;
+
+  --shadow-md: 0 8px 24px rgba(28, 25, 21, 0.1);
+  --shadow-lg: 0 24px 64px rgba(28, 25, 21, 0.16);
+  --pin-shadow: 0 4px 14px rgba(28, 25, 21, 0.18);
+  --pin-shadow-hover: 0 8px 22px rgba(28, 25, 21, 0.22);
+
+  --font: "Inter", ui-sans-serif, system-ui, -apple-system,
+    "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+  --mono: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
+
+  --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --sidebar-w: 336px;
+  --header-h: 60px;
+}
+
+[data-theme="dark"] {
+  color-scheme: dark;
+
+  --bg: #141414;
+  --surface-1: #181818;
+  --surface-2: #1e1e1e;
+  --surface-3: #262626;
+  --surface-raised: #2a2a2a;
+  --surface-glass: rgba(24, 24, 24, 0.94);
+
+  --line: #2b2b2b;
+  --line-strong: #3a3a3a;
+  --btn-hover-line: #4a4a4a;
+
+  --text: #e6e6e6;
+  --text-muted: #a0a0a0;
+  --text-dim: #7a7a7a;
+
+  --accent: #c4a07a;
+  --accent-hover: #d4b48e;
+  --accent-dim: #a07d58;
+  --accent-wash: rgba(196, 160, 122, 0.14);
+  --accent-line: rgba(196, 160, 122, 0.36);
+  --on-accent: #1a1410;
+  --focus: #c4a07a;
+
+  --overlay: rgba(0, 0, 0, 0.72);
+  --map-bg: #181818;
+  --preview-clear: rgba(8, 8, 8, 0.82);
+  --cue-bg: rgba(255, 255, 255, 0.04);
+  --spinner-track: rgba(255, 255, 255, 0.25);
+
+  --sev-high: #ef6d3d;
+  --sev-high-wash: rgba(239, 109, 61, 0.14);
+  --sev-high-line: rgba(239, 109, 61, 0.32);
+  --sev-moderate: #e8ac1c;
+  --sev-moderate-wash: rgba(232, 172, 28, 0.13);
+  --sev-moderate-line: rgba(232, 172, 28, 0.3);
+  --sev-low: #63a8dd;
+  --sev-low-wash: rgba(99, 168, 221, 0.13);
+  --sev-low-line: rgba(99, 168, 221, 0.3);
+
+  --danger: #e0555a;
+  --ok: #5fbf87;
+  --toast-error-bg: #2a1418;
+  --toast-error-text: #f0a1a4;
+  --toast-error-line: rgba(224, 85, 90, 0.5);
+  --toast-ok-line: rgba(95, 191, 135, 0.4);
+
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.45);
+  --shadow-lg: 0 24px 64px rgba(0, 0, 0, 0.6);
+  --pin-shadow: 0 4px 14px rgba(0, 0, 0, 0.55);
+  --pin-shadow-hover: 0 8px 22px rgba(0, 0, 0, 0.6);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  background: var(--bg);
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 14px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow: hidden;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  margin: 0;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.25;
+}
+
+p {
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+input,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+/* tabular nums so changing digits don't shift layout */
+.tnum {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
+}
+
+.eyebrow {
+  font-size: 10.5px;
+  font-weight: 650;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+.muted {
+  color: var(--text-muted);
+}
+
+.dim {
+  color: var(--text-dim);
+}
+
+.skip-link {
+  position: absolute;
+  top: -60px;
+  left: var(--s4);
+  z-index: 2000;
+  padding: 10px 16px;
+  background: var(--accent);
+  color: var(--on-accent);
+  border-radius: var(--r-sm);
+  font-weight: 650;
+  transition: top 140ms var(--ease);
+}
+
+.skip-link:focus {
+  top: var(--s3);
+}
+
+:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+  border-radius: var(--r-sm);
+}
+
+/* thin scrollbars */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--line-strong) transparent;
+}
+
+*::-webkit-scrollbar {
+  width: 9px;
+  height: 9px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: var(--line-strong);
+  border-radius: 99px;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: var(--btn-hover-line);
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* respect prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

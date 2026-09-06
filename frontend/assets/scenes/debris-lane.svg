@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 560" width="800" height="560" role="img" aria-label="Illustration of construction debris and a displaced barrier occupying a road lane">
+  <defs>
+    <linearGradient id="dl-sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#586878"/>
+      <stop offset="1" stop-color="#93a0ad"/>
+    </linearGradient>
+    <linearGradient id="dl-road" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#4b5057"/>
+      <stop offset="1" stop-color="#2b2f34"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="800" height="560" fill="url(#dl-sky)"/>
+
+  <!-- brick facades, Pioneer Square flavour -->
+  <g>
+    <rect x="0" y="70" width="230" height="230" fill="#7d5245"/>
+    <rect x="560" y="50" width="240" height="250" fill="#6f4a3e"/>
+  </g>
+  <g fill="#2f3a44" opacity="0.7">
+    <rect x="26" y="102" width="34" height="52" rx="4"/><rect x="82" y="102" width="34" height="52" rx="4"/>
+    <rect x="138" y="102" width="34" height="52" rx="4"/>
+    <rect x="26" y="188" width="34" height="52" rx="4"/><rect x="82" y="188" width="34" height="52" rx="4"/>
+    <rect x="596" y="88" width="36" height="54" rx="4"/><rect x="656" y="88" width="36" height="54" rx="4"/>
+    <rect x="716" y="88" width="36" height="54" rx="4"/>
+    <rect x="596" y="176" width="36" height="54" rx="4"/><rect x="716" y="176" width="36" height="54" rx="4"/>
+  </g>
+
+  <!-- sidewalk, deliberately clear: pedestrian access is unaffected -->
+  <rect x="0" y="290" width="800" height="42" fill="#98a2ac"/>
+  <rect x="0" y="330" width="800" height="12" fill="#b0b9c2"/>
+
+  <!-- roadway, two lanes -->
+  <rect x="0" y="342" width="800" height="218" fill="url(#dl-road)"/>
+  <g fill="#e6ecf1" opacity="0.55">
+    <rect x="20" y="450" width="76" height="8"/>
+    <rect x="176" y="450" width="76" height="8"/>
+    <rect x="332" y="450" width="76" height="8"/>
+    <rect x="488" y="450" width="76" height="8"/>
+    <rect x="644" y="450" width="76" height="8"/>
+  </g>
+
+  <!-- displaced barrier lying at an angle across the right lane -->
+  <g transform="rotate(-14 420 400)">
+    <rect x="292" y="374" width="266" height="54" rx="8" fill="#d9dee3"/>
+    <g fill="#d2542f">
+      <path d="M300 374 h34 l-34 54 h-16 v-30 z"/>
+      <path d="M362 374 h34 l-54 54 h-34 z"/>
+      <path d="M424 374 h34 l-54 54 h-34 z"/>
+      <path d="M486 374 h34 l-54 54 h-34 z"/>
+      <path d="M548 374 h10 v20 l-24 34 h-34 z"/>
+    </g>
+    <rect x="292" y="374" width="266" height="54" rx="8" fill="none" stroke="#9aa2aa" stroke-width="3"/>
+    <rect x="300" y="428" width="28" height="16" rx="3" fill="#8e969e"/>
+    <rect x="522" y="428" width="28" height="16" rx="3" fill="#8e969e"/>
+  </g>
+
+  <!-- toppled cone -->
+  <g transform="rotate(78 208 470)">
+    <path d="M208 424 L226 494 L190 494 Z" fill="#e0623a"/>
+    <rect x="182" y="492" width="52" height="12" rx="3" fill="#c4552f"/>
+    <rect x="196" y="452" width="24" height="9" fill="#f4ece4"/>
+  </g>
+
+  <!-- scattered timber and rubble -->
+  <g>
+    <rect x="600" y="470" width="132" height="14" rx="4" fill="#8a6a44" transform="rotate(-7 600 470)"/>
+    <rect x="628" y="500" width="104" height="12" rx="4" fill="#71563a" transform="rotate(9 628 500)"/>
+    <rect x="146" y="512" width="88" height="12" rx="4" fill="#8a6a44" transform="rotate(-4 146 512)"/>
+  </g>
+  <g fill="#6d757e">
+    <circle cx="520" cy="500" r="11"/><circle cx="552" cy="516" r="8"/>
+    <circle cx="486" cy="516" r="7"/><circle cx="300" cy="492" r="9"/>
+    <circle cx="336" cy="506" r="6"/>
+  </g>
+
+  <!-- the adjacent lane is visibly clear, matching vehicle_access: limited -->
+  <g opacity="0.5">
+    <rect x="52" y="360" width="118" height="40" rx="11" fill="#5c6673"/>
+    <rect x="78" y="348" width="66" height="24" rx="8" fill="#6e7986"/>
+    <circle cx="80" cy="404" r="11" fill="#1d2126"/>
+    <circle cx="142" cy="404" r="11" fill="#1d2126"/>
+  </g>
+
+  <rect width="800" height="560" fill="#0d1520" opacity="0.14"/>
+
+  <g font-family="ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600">
+    <rect x="18" y="516" width="152" height="28" rx="6" fill="#0b1017" opacity="0.72"/>
+    <text x="30" y="535" fill="#c7d0da" letter-spacing="1.4">DEMO SCENE</text>
+  </g>
+</svg>

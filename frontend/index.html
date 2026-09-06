@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>HazardMap — public safety map</title>
+    <meta name="description" content="A public map of street hazards from community reports." />
+    <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="/vendor/leaflet/leaflet.css" />
+    <link rel="stylesheet" href="/css/base.css" />
+    <link rel="stylesheet" href="/css/layout.css" />
+    <link rel="stylesheet" href="/css/components.css" />
+    <script>
+      (function () {
+        try {
+          var stored = localStorage.getItem("hazardmap-theme");
+          var theme =
+            stored === "dark" || stored === "light"
+              ? stored
+              : window.matchMedia("(prefers-color-scheme: dark)").matches
+                ? "dark"
+                : "light";
+          document.documentElement.setAttribute("data-theme", theme);
+        } catch (error) {
+          document.documentElement.setAttribute("data-theme", "light");
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <a class="skip-link" href="#hazard-list">Skip to hazard list</a>
+
+    <div class="app">
+      <header class="header">
+        <a class="brand" href="#map">
+          <div class="brand__mark" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 3 2.5 20h19L12 3Z" />
+              <path d="M12 10v4" />
+              <path d="M12 17.4h.01" />
+            </svg>
+          </div>
+          <div>
+            <div class="brand__name">HazardMap</div>
+            <div class="brand__tag">Public safety map</div>
+          </div>
+        </a>
+
+        <nav class="nav" aria-label="Primary">
+          <a class="nav__link" href="#map" data-nav="map" aria-current="page">Map</a>
+          <a class="nav__link" href="#how-it-works" data-nav="how-it-works">How it works</a>
+          <a class="nav__link" href="#about" data-nav="about">About</a>
+        </nav>
+
+        <div class="header__spacer"></div>
+
+        <button class="btn btn--primary" id="btn-report">
+          <span class="btn__icon" aria-hidden="true">+</span> Report hazard
+        </button>
+        <button class="theme-toggle" id="btn-theme" type="button" aria-label="Switch to dark theme" aria-pressed="false">
+          <svg class="theme-toggle__icon theme-toggle__icon--moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 14.5A8.5 8.5 0 1 1 9.5 3 7 7 0 0 0 21 14.5Z" />
+          </svg>
+          <svg class="theme-toggle__icon theme-toggle__icon--sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="4" />
+            <path d="M12 3v1.5M12 19.5V21M4.5 12H3M21 12h-1.5M6.2 6.2 5.1 5.1M18.9 18.9 17.8 17.8M6.2 17.8 5.1 18.9M18.9 5.1 17.8 6.2" />
+          </svg>
+        </button>
+      </header>
+
+      <div class="main">
+        <!-- map -->
+        <div class="body" id="view-map" data-view="map">
+          <aside class="rail" aria-label="Hazard overview and filters">
+            <div class="rail__scroll">
+              <details class="rail__section" open>
+                <summary class="rail__summary">
+                  <h2 class="eyebrow">Filters</h2>
+                </summary>
+                <div class="rail__body">
+                  <div class="field">
+                    <div class="field__label">
+                      <span class="eyebrow">Type</span>
+                      <button class="btn btn--ghost btn--sm" id="btn-clear-filters" type="button">
+                        Reset
+                      </button>
+                    </div>
+                    <div class="catlist" id="category-list" role="group" aria-label="Filter by hazard type"></div>
+                  </div>
+
+                  <div class="field">
+                    <div class="field__label">
+                      <span class="eyebrow">Severity</span>
+                    </div>
+                    <div class="segmented" id="filter-severity" role="group" aria-label="Filter by severity">
+                      <button type="button" data-severity="all" aria-pressed="true">All</button>
+                      <button type="button" data-severity="high" aria-pressed="false">High</button>
+                      <button type="button" data-severity="moderate" aria-pressed="false">Moderate</button>
+                      <button type="button" data-severity="low" aria-pressed="false">Low</button>
+                    </div>
+                  </div>
+
+                  <div class="field">
+                    <div class="field__label">
+                      <span class="eyebrow">Reported within</span>
+                    </div>
+                    <div class="segmented" id="filter-time" role="group" aria-label="Filter by time reported">
+                      <button type="button" data-hours="1" aria-pressed="false">1h</button>
+                      <button type="button" data-hours="6" aria-pressed="false">6h</button>
+                      <button type="button" data-hours="24" aria-pressed="false">24h</button>
+                      <button type="button" data-hours="all" aria-pressed="true">All</button>
+                    </div>
+                  </div>
+
+                  <div class="field">
+                    <div class="field__label">
+                      <label class="eyebrow" for="filter-confidence">Minimum confidence</label>
+                      <span class="eyebrow tnum" id="filter-confidence-value">0%</span>
+                    </div>
+                    <input
+                      type="range"
+                      id="filter-confidence"
+                      min="0"
+                      max="95"
+                      step="5"
+                      value="0"
+                    />
+                  </div>
+
+                  <div class="field">
+                    <div class="field__label">
+                      <span class="eyebrow">Reports</span>
+                    </div>
+                    <div class="segmented" id="filter-reports" role="group" aria-label="Filter by number of reports">
+                      <button type="button" data-min="1" aria-pressed="true">Any</button>
+                      <button type="button" data-min="2" aria-pressed="false">2+ reports</button>
+                      <button type="button" data-min="5" aria-pressed="false">5+ reports</button>
+                    </div>
+                  </div>
+                </div>
+              </details>
+
+              <details class="rail__section" open>
+                <summary class="rail__summary">
+                  <h2 class="eyebrow" id="hazard-list-heading">
+                    Hazards <span class="dim tnum" id="hazard-list-count"></span>
+                  </h2>
+                </summary>
+                <div class="rail__body">
+                  <div class="hzlist__toolbar">
+                    <div class="field">
+                      <div class="field__label">
+                        <span class="eyebrow">Sort</span>
+                      </div>
+                      <div class="segmented" id="hazard-sort" role="group" aria-label="Sort hazard list">
+                        <button type="button" data-sort="reports" aria-pressed="true">Reports</button>
+                        <button type="button" data-sort="hazard" aria-pressed="false">Hazard</button>
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    class="hzlist"
+                    id="hazard-list"
+                    role="list"
+                    aria-labelledby="hazard-list-heading"
+                    tabindex="-1"
+                  ></div>
+                  <div id="hazard-list-more"></div>
+                </div>
+              </details>
+            </div>
+          </aside>
+
+          <main class="stage" id="stage">
+            <div id="map" role="application" aria-label="Map of reported hazards"></div>
+            <div id="detail-root"></div>
+            <div class="mapctl mapctl--tl">
+              <span class="pill" id="pill-visible">
+                <strong class="tnum" id="pill-hazards">—</strong> hazards ·
+                <strong class="tnum" id="pill-reports">—</strong> reports
+              </span>
+            </div>
+            <aside class="mapctl mapctl--tr" aria-label="Map legend">
+              <div class="legend">
+                <div class="legend__title eyebrow">Legend</div>
+                <div class="legend__row">
+                  <span class="legend__swatch legend__swatch--high" aria-hidden="true"></span>
+                  <span><strong>High</strong> — solid</span>
+                </div>
+                <div class="legend__row">
+                  <span class="legend__swatch legend__swatch--moderate" aria-hidden="true"></span>
+                  <span><strong>Moderate</strong> — dashed</span>
+                </div>
+                <div class="legend__row">
+                  <span class="legend__swatch legend__swatch--low" aria-hidden="true"></span>
+                  <span><strong>Low</strong> — dotted</span>
+                </div>
+                <p class="legend__note">Number is report count</p>
+              </div>
+            </aside>
+          </main>
+        </div>
+
+        <!-- how it works -->
+        <main class="page" id="view-how-it-works" data-view="how-it-works" hidden>
+          <article class="prose">
+            <h1>How it works</h1>
+            <p>
+              HazardMap turns a photo or a short description into one map
+              marker per real-world event. Classification is only a step —
+              the harder part is deciding which reports describe the same thing.
+            </p>
+
+            <h2>The pipeline</h2>
+            <div class="pipeline">
+              <span class="pipeline__node">Report</span>
+              <span class="pipeline__arrow" aria-hidden="true">&rarr;</span>
+              <span class="pipeline__node">Classification</span>
+              <span class="pipeline__arrow" aria-hidden="true">&rarr;</span>
+              <span class="pipeline__node">Structured record</span>
+              <span class="pipeline__arrow" aria-hidden="true">&rarr;</span>
+              <span class="pipeline__node">Clustering</span>
+              <span class="pipeline__arrow" aria-hidden="true">&rarr;</span>
+              <span class="pipeline__node">Confidence</span>
+              <span class="pipeline__arrow" aria-hidden="true">&rarr;</span>
+              <span class="pipeline__node">Live map</span>
+            </div>
+
+            <h2>How two reports become one hazard</h2>
+            <p>
+              A new report joins an existing hazard when three conditions hold
+              at once: the <strong>category matches</strong>, the
+              <strong>distance is inside that category's clustering radius</strong>,
+              and the hazard was <strong>last reported inside its time
+              window</strong>. Of the hazards that qualify, it joins the nearest.
+            </p>
+            <p>
+              Thresholds differ by type because the hazards do. Smoke is
+              visible from far away and often clears in hours; a broken
+              streetlight is a point object that can stay out for days.
+            </p>
+            <div class="kv" id="cluster-table"></div>
+
+            <h2>How confidence is calculated</h2>
+            <p>
+              Evidence accumulates in <strong>log-odds</strong>, so every
+              factor is an independent term with its own sign and weight.
+              The score counts <strong>distinct reporters</strong>, not
+              submissions, so one person filing five times does not look like
+              five people. Confidence decays with time, because a hazard
+              nobody has reported lately may already be gone.
+            </p>
+            <p>
+              A single report is capped below certainty, no matter how
+              confident the classification is, and nothing ever reaches 100%.
+              Open any hazard on the map to see how the score was built.
+            </p>
+
+            <h2>What this system cannot do</h2>
+            <ul class="prose--limits">
+              <li>Classification can be wrong. Category, severity, and access impact are all estimates.</li>
+              <li>Reports can be mistaken, duplicated, or deliberately false. More reports raise confidence; they do not establish truth.</li>
+              <li>Phone location data is imprecise, and a reporter may pin a hazard from across the street.</li>
+              <li>Several reports agreeing does not make a hazard real, current, or still present.</li>
+              <li>This is decision support. It is not a dispatch system and must not replace emergency services.</li>
+              <li>Reports are public. Anything identifying a person should never be submitted.</li>
+            </ul>
+          </article>
+        </main>
+
+        <!-- about -->
+        <main class="page" id="view-about" data-view="about" hidden>
+          <article class="prose">
+            <h1>About HazardMap</h1>
+            <p>
+              HazardMap is a public-safety map built on one idea: the hard
+              part of crowdsourced hazard reporting is not collecting
+              reports. It is deciding which reports describe the
+              <em>same real-world thing</em>.
+            </p>
+            <p>
+              Twelve people describing one fallen tree should produce one
+              marker at high confidence, not twelve pins. HazardMap
+              classifies a photo or a sentence, groups reports that describe
+              one event, and scores the result with an explainable
+              confidence figure.
+            </p>
+            <p>
+              It is an awareness tool for streets, sidewalks, and public
+              space — fallen trees, flooding, dark signals, road damage,
+              smoke, and similar hazards. It is not an emergency service.
+              Call 911 for emergencies.
+            </p>
+          </article>
+        </main>
+      </div>
+
+      <footer class="footer">
+        <strong>Decision support, not an emergency service.</strong>
+        <span>Call 911 for emergencies. Confidence reflects how many people reported the same thing, not official verification.</span>
+        <span class="footer__spacer"></span>
+        <button class="footer__link" id="btn-reset-demo" type="button">
+          Reset demo data
+        </button>
+      </footer>
+    </div>
+
+    <div class="toasts" id="toasts" role="status" aria-live="polite"></div>
+    <div id="modal-root"></div>
+
+    <script src="/vendor/leaflet/leaflet.js"></script>
+    <script type="module" src="/js/app.js"></script>
+  </body>
+</html>

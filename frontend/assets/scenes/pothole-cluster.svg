@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 560" width="800" height="560" role="img" aria-label="Illustration of a cluster of deep potholes in a road travel lane">
+  <defs>
+    <linearGradient id="pc-road" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#585e66"/>
+      <stop offset="1" stop-color="#31363c"/>
+    </linearGradient>
+    <radialGradient id="pc-hole" cx="0.5" cy="0.35" r="0.75">
+      <stop offset="0" stop-color="#15181c"/>
+      <stop offset="0.6" stop-color="#22262b"/>
+      <stop offset="1" stop-color="#3a4046"/>
+    </radialGradient>
+    <radialGradient id="pc-hole2" cx="0.45" cy="0.4" r="0.8">
+      <stop offset="0" stop-color="#191d21"/>
+      <stop offset="1" stop-color="#3d4349"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="800" height="560" fill="#6f7883"/>
+  <!-- sidewalk and kerb at the top of frame -->
+  <rect x="0" y="0" width="800" height="96" fill="#9aa3ad"/>
+  <rect x="0" y="96" width="800" height="18" fill="#b3bbc4"/>
+  <rect x="0" y="114" width="800" height="446" fill="url(#pc-road)"/>
+
+  <!-- lane marking -->
+  <rect x="0" y="176" width="800" height="10" fill="#e6ecf1" opacity="0.5"/>
+  <g fill="#d8c65c" opacity="0.7">
+    <rect x="30" y="500" width="90" height="10"/>
+    <rect x="200" y="500" width="90" height="10"/>
+    <rect x="370" y="500" width="90" height="10"/>
+    <rect x="540" y="500" width="90" height="10"/>
+    <rect x="710" y="500" width="90" height="10"/>
+  </g>
+
+  <!-- asphalt texture -->
+  <g fill="#454b52" opacity="0.55">
+    <circle cx="90" cy="250" r="3"/><circle cx="180" cy="330" r="2.5"/>
+    <circle cx="640" cy="270" r="3"/><circle cx="720" cy="400" r="2.5"/>
+    <circle cx="300" cy="460" r="2.5"/><circle cx="520" cy="200" r="2.5"/>
+  </g>
+
+  <!-- primary pothole with an undercut edge -->
+  <g>
+    <ellipse cx="356" cy="322" rx="150" ry="86" fill="#7b848e" opacity="0.5"/>
+    <ellipse cx="352" cy="318" rx="132" ry="74" fill="url(#pc-hole)"/>
+    <!-- exposed aggregate base -->
+    <g fill="#6b6155">
+      <circle cx="330" cy="330" r="8"/><circle cx="366" cy="342" r="6"/>
+      <circle cx="392" cy="316" r="7"/><circle cx="308" cy="304" r="5"/>
+      <circle cx="352" cy="300" r="4.5"/>
+    </g>
+    <!-- water pooled in the depression -->
+    <ellipse cx="352" cy="336" rx="76" ry="30" fill="#4b5c68" opacity="0.75"/>
+    <rect x="300" y="330" width="90" height="3" rx="2" fill="#b8c8d4" opacity="0.55"/>
+    <rect x="322" y="344" width="60" height="2.5" rx="2" fill="#b8c8d4" opacity="0.4"/>
+    <!-- fractured rim -->
+    <path d="M220 318 L246 300 L268 316 L292 296 L316 312" stroke="#8a939d" stroke-width="4" fill="none" opacity="0.75"/>
+    <path d="M400 300 L428 316 L456 298 L478 314" stroke="#8a939d" stroke-width="4" fill="none" opacity="0.75"/>
+  </g>
+
+  <!-- secondary holes -->
+  <g>
+    <ellipse cx="590" cy="410" rx="78" ry="44" fill="#7b848e" opacity="0.45"/>
+    <ellipse cx="588" cy="408" rx="66" ry="36" fill="url(#pc-hole2)"/>
+    <g fill="#6b6155"><circle cx="574" cy="414" r="5"/><circle cx="604" cy="404" r="4"/></g>
+  </g>
+  <g>
+    <ellipse cx="166" cy="424" rx="56" ry="32" fill="#7b848e" opacity="0.45"/>
+    <ellipse cx="164" cy="422" rx="46" ry="25" fill="url(#pc-hole2)"/>
+    <g fill="#6b6155"><circle cx="156" cy="426" r="4"/></g>
+  </g>
+
+  <!-- radiating cracks -->
+  <g stroke="#2c3137" stroke-width="3.5" fill="none" opacity="0.8">
+    <path d="M480 318 L536 350 L556 384"/>
+    <path d="M228 348 L186 386 L172 398"/>
+    <path d="M352 396 L340 442 L356 486"/>
+    <path d="M470 356 L512 372"/>
+  </g>
+
+  <g font-family="ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600">
+    <rect x="18" y="516" width="152" height="28" rx="6" fill="#0b1017" opacity="0.72"/>
+    <text x="30" y="535" fill="#c7d0da" letter-spacing="1.4">DEMO SCENE</text>
+  </g>
+</svg>

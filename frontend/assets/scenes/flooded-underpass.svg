@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 560" width="800" height="560" role="img" aria-label="Illustration of standing water covering a roadway beneath an underpass">
+  <defs>
+    <linearGradient id="fu-sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#4c5967"/>
+      <stop offset="1" stop-color="#7d8b99"/>
+    </linearGradient>
+    <linearGradient id="fu-water" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#4a5f70"/>
+      <stop offset="0.5" stop-color="#5f7b8d"/>
+      <stop offset="1" stop-color="#38495a"/>
+    </linearGradient>
+    <linearGradient id="fu-deck" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#6d737a"/>
+      <stop offset="1" stop-color="#474c52"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="800" height="560" fill="url(#fu-sky)"/>
+
+  <!-- underpass structure -->
+  <rect x="0" y="80" width="800" height="86" fill="url(#fu-deck)"/>
+  <rect x="0" y="166" width="800" height="10" fill="#31363b"/>
+  <rect x="60" y="176" width="72" height="200" fill="#5a6067"/>
+  <rect x="668" y="176" width="72" height="200" fill="#5a6067"/>
+  <rect x="60" y="176" width="12" height="200" fill="#70777e"/>
+  <rect x="668" y="176" width="12" height="200" fill="#70777e"/>
+
+  <!-- shadowed void under the deck -->
+  <rect x="132" y="176" width="536" height="188" fill="#252c33"/>
+  <rect x="132" y="176" width="536" height="52" fill="#1b2127"/>
+
+  <!-- far roadway receding into the underpass -->
+  <path d="M300 364 L500 364 L446 300 L354 300 Z" fill="#3a4148"/>
+
+  <!-- kerb line, submerged and only partly visible -->
+  <rect x="132" y="356" width="90" height="9" fill="#8e98a2" opacity="0.55"/>
+  <rect x="578" y="356" width="90" height="9" fill="#8e98a2" opacity="0.55"/>
+
+  <!-- standing water -->
+  <rect x="0" y="364" width="800" height="196" fill="url(#fu-water)"/>
+
+  <!-- specular highlights: the signature of a water surface -->
+  <g fill="#c3d4e0" opacity="0.5">
+    <rect x="90" y="392" width="220" height="4" rx="2"/>
+    <rect x="360" y="384" width="300" height="3" rx="2"/>
+    <rect x="150" y="424" width="380" height="5" rx="2"/>
+    <rect x="420" y="452" width="290" height="4" rx="2"/>
+    <rect x="60" y="484" width="240" height="5" rx="2"/>
+    <rect x="330" y="512" width="360" height="4" rx="2"/>
+  </g>
+  <!-- inverted reflection of the deck -->
+  <rect x="0" y="368" width="800" height="40" fill="#2a333c" opacity="0.45"/>
+  <g opacity="0.3">
+    <rect x="60" y="368" width="72" height="80" fill="#20272e"/>
+    <rect x="668" y="368" width="72" height="80" fill="#20272e"/>
+  </g>
+
+  <!-- partly submerged sign -->
+  <g>
+    <rect x="694" y="300" width="8" height="96" fill="#8d959d"/>
+    <rect x="654" y="268" width="90" height="44" rx="5" fill="#c9532f"/>
+    <text x="699" y="296" font-family="ui-sans-serif, system-ui, sans-serif" font-size="18" font-weight="700" fill="#fdf6ef" text-anchor="middle">FLOOD</text>
+  </g>
+
+  <!-- ripples around the columns -->
+  <g stroke="#b6c9d6" stroke-width="2.5" fill="none" opacity="0.4">
+    <ellipse cx="96" cy="382" rx="52" ry="10"/>
+    <ellipse cx="96" cy="382" rx="78" ry="16"/>
+    <ellipse cx="704" cy="382" rx="52" ry="10"/>
+  </g>
+
+  <rect width="800" height="560" fill="#0a1017" opacity="0.2"/>
+
+  <g font-family="ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600">
+    <rect x="18" y="516" width="152" height="28" rx="6" fill="#0b1017" opacity="0.72"/>
+    <text x="30" y="535" fill="#c7d0da" letter-spacing="1.4">DEMO SCENE</text>
+  </g>
+</svg>

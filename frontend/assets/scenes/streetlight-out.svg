@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 560" width="800" height="560" role="img" aria-label="Illustration of an unlit streetlight leaving a dark gap on a walkway between two lit poles">
+  <defs>
+    <linearGradient id="so-sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0e1520"/>
+      <stop offset="1" stop-color="#25313f"/>
+    </linearGradient>
+    <radialGradient id="so-glow" cx="0.5" cy="0.08" r="0.62">
+      <stop offset="0" stop-color="#ffd98a" stop-opacity="0.65"/>
+      <stop offset="0.55" stop-color="#ffd98a" stop-opacity="0.16"/>
+      <stop offset="1" stop-color="#ffd98a" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="800" height="560" fill="url(#so-sky)"/>
+
+  <!-- stars -->
+  <g fill="#d6e0ec" opacity="0.5">
+    <circle cx="90" cy="60" r="1.6"/><circle cx="230" cy="38" r="1.2"/>
+    <circle cx="410" cy="52" r="1.5"/><circle cx="620" cy="34" r="1.2"/>
+    <circle cx="720" cy="76" r="1.6"/><circle cx="520" cy="88" r="1.1"/>
+  </g>
+
+  <!-- distant buildings -->
+  <g fill="#182230">
+    <rect x="0" y="180" width="140" height="180"/>
+    <rect x="660" y="150" width="140" height="210"/>
+  </g>
+  <g fill="#c9a75e" opacity="0.4">
+    <rect x="22" y="206" width="12" height="18"/><rect x="56" y="240" width="12" height="18"/>
+    <rect x="96" y="206" width="12" height="18"/>
+    <rect x="686" y="180" width="12" height="18"/><rect x="726" y="214" width="12" height="18"/>
+  </g>
+
+  <!-- walkway -->
+  <rect x="0" y="360" width="800" height="200" fill="#2b3542"/>
+  <rect x="0" y="360" width="800" height="10" fill="#3c4956"/>
+  <g stroke="#1d2632" stroke-width="3" opacity="0.8">
+    <path d="M0 420 H800"/><path d="M0 480 H800"/>
+    <path d="M160 360 V560"/><path d="M400 360 V560"/><path d="M640 360 V560"/>
+  </g>
+
+  <!-- lit pole, left: establishes that the grid has power -->
+  <g>
+    <ellipse cx="120" cy="470" rx="150" ry="96" fill="url(#so-glow)"/>
+    <rect x="114" y="180" width="12" height="200" fill="#3e4a58"/>
+    <path d="M120 180 q0 -26 30 -26 h26" stroke="#3e4a58" stroke-width="11" fill="none"/>
+    <rect x="160" y="148" width="46" height="16" rx="7" fill="#4a5766"/>
+    <ellipse cx="183" cy="168" rx="20" ry="8" fill="#ffe6ad"/>
+  </g>
+
+  <!-- lit pole, right -->
+  <g>
+    <ellipse cx="690" cy="470" rx="150" ry="96" fill="url(#so-glow)"/>
+    <rect x="684" y="180" width="12" height="200" fill="#3e4a58"/>
+    <path d="M690 180 q0 -26 -30 -26 h-26" stroke="#3e4a58" stroke-width="11" fill="none"/>
+    <rect x="604" y="148" width="46" height="16" rx="7" fill="#4a5766"/>
+    <ellipse cx="627" cy="168" rx="20" ry="8" fill="#ffe6ad"/>
+  </g>
+
+  <!-- the dark pole in between -->
+  <g>
+    <rect x="396" y="150" width="14" height="230" fill="#2f3a47"/>
+    <rect x="386" y="376" width="34" height="12" rx="3" fill="#28313c"/>
+    <path d="M403 150 q0 -30 34 -30 h30" stroke="#2f3a47" stroke-width="12" fill="none"/>
+    <rect x="452" y="112" width="54" height="18" rx="8" fill="#333e4b"/>
+    <!-- luminaire with no output -->
+    <ellipse cx="479" cy="136" rx="23" ry="9" fill="#1a222c"/>
+    <ellipse cx="479" cy="134" rx="17" ry="6" fill="#141b23"/>
+  </g>
+
+  <!-- the unlit gap on the walkway -->
+  <rect x="288" y="360" width="230" height="200" fill="#0b1118" opacity="0.72"/>
+
+  <!-- a pedestrian in the dark stretch -->
+  <g fill="#161e27" opacity="0.9">
+    <circle cx="366" cy="424" r="12"/>
+    <rect x="354" y="438" width="24" height="42" rx="9"/>
+    <rect x="356" y="478" width="8" height="30" rx="4"/>
+    <rect x="368" y="478" width="8" height="30" rx="4"/>
+  </g>
+
+  <g font-family="ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600">
+    <rect x="18" y="516" width="152" height="28" rx="6" fill="#0b1017" opacity="0.8"/>
+    <text x="30" y="535" fill="#c7d0da" letter-spacing="1.4">DEMO SCENE</text>
+  </g>
+</svg>
