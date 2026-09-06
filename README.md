@@ -66,7 +66,7 @@ nothing ever exceeds 97% (logically, one report always needs to be taken with a 
 salt. Similarly, multiple reports don't mean that something is 100% certain). 
 The interface says "corroborated", never "verified," for this reason.
 
-The in-app **How it works** tab has the per-category thresholds, the confidence
+The in-app "How it works" tab has the per-category thresholds, the confidence
 breakdown, and the system's limits.
 
 ---
@@ -114,5 +114,5 @@ traffic and weather feeds, and any build tooling.
 
 Photos are base64 in SQLite. Fine for a prototype, not for production.
 
-HazardMap is decision support and awareness. It is not a dispatch system and
+HazardMap is used to aid decisions and help with awareness. It is not a dispatch system and
 must not replace emergency services. It has no ability to report emergencies as of current.

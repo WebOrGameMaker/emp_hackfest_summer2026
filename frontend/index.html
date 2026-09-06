@@ -203,8 +203,8 @@
             <h1>How it works</h1>
             <p>
               HazardMap turns a photo or a short description into one map
-              marker per real-world event. Classification is only a step —
-              the harder part is deciding which reports describe the same thing.
+              marker per real-world event. Classification is only a step.
+              The harder part is deciding which reports describe the same thing. (Consult the README for more details.)
             </p>
 
             <h2>The pipeline</h2>
@@ -213,53 +213,42 @@
               <span class="pipeline__arrow" aria-hidden="true">&rarr;</span>
               <span class="pipeline__node">Classification</span>
               <span class="pipeline__arrow" aria-hidden="true">&rarr;</span>
-              <span class="pipeline__node">Structured record</span>
+              <span class="pipeline__node">Record</span>
               <span class="pipeline__arrow" aria-hidden="true">&rarr;</span>
               <span class="pipeline__node">Clustering</span>
               <span class="pipeline__arrow" aria-hidden="true">&rarr;</span>
-              <span class="pipeline__node">Confidence</span>
+              <span class="pipeline__node">Confidence</span> 
               <span class="pipeline__arrow" aria-hidden="true">&rarr;</span>
-              <span class="pipeline__node">Live map</span>
+              <span class="pipeline__node">Map</span>
             </div>
 
             <h2>How two reports become one hazard</h2>
             <p>
               A new report joins an existing hazard when three conditions hold
-              at once: the <strong>category matches</strong>, the
-              <strong>distance is inside that category's clustering radius</strong>,
-              and the hazard was <strong>last reported inside its time
-              window</strong>. Of the hazards that qualify, it joins the nearest.
+              at once. The category matches, the distance is inside that category's clustering radius, and the hazard was last reported inside its time window. Of the hazards that qualify, it joins the nearest.
             </p>
             <p>
-              Thresholds differ by type because the hazards do. Smoke is
-              visible from far away and often clears in hours; a broken
-              streetlight is a point object that can stay out for days.
-            </p>
+              Thresholds differ by type because the hazards do. Smoke is visible from far away and often clears in hours, while a broken streetlight can stay out for days.
             <div class="kv" id="cluster-table"></div>
 
             <h2>How confidence is calculated</h2>
             <p>
-              Evidence accumulates in <strong>log-odds</strong>, so every
-              factor is an independent term with its own sign and weight.
-              The score counts <strong>distinct reporters</strong>, not
-              submissions, so one person filing five times does not look like
-              five people. Confidence decays with time, because a hazard
-              nobody has reported lately may already be gone.
+              Evidence accrues in log-odds, so every  factor is an independent term with its own sign and weight. Each factor is multiplied together to produce the final score.
+              The score counts distinct reporters, not submissions, so one person filing five times does not look like five different people.
+              Confidence decays with time because a hazard nobody has reported lately may already be gone and/or resolved.
             </p>
             <p>
-              A single report is capped below certainty, no matter how
-              confident the classification is, and nothing ever reaches 100%.
-              Open any hazard on the map to see how the score was built.
+              A single report is capped below certainty, no matter how confident the classification is, and nothing ever reaches 100%. Open any hazard on the map to see how the score was built.
             </p>
 
             <h2>What this system cannot do</h2>
             <ul class="prose--limits">
-              <li>Classification can be wrong. Category, severity, and access impact are all estimates.</li>
-              <li>Reports can be mistaken, duplicated, or deliberately false. More reports raise confidence; they do not establish truth.</li>
+              <li>Classification can be wrong. Category, severity, and access impact are all estimates/guesses.</li>
+              <li>Reports can be mistaken, duplicated, or deliberately false. More reports raise confidence, they do not establish truth.</li>
               <li>Phone location data is imprecise, and a reporter may pin a hazard from across the street.</li>
               <li>Several reports agreeing does not make a hazard real, current, or still present.</li>
-              <li>This is decision support. It is not a dispatch system and must not replace emergency services.</li>
-              <li>Reports are public. Anything identifying a person should never be submitted.</li>
+              <li>This is decision support. It is not a dispatching system or a system to alert authorities, and must not replace emergency services.</li>
+              <li>Reports are public. Anything identifying a person (PII, Personally Identifiable Information) should never be submitted.</li>
             </ul>
           </article>
         </main>
@@ -269,31 +258,28 @@
           <article class="prose">
             <h1>About HazardMap</h1>
             <p>
-              HazardMap is a public-safety map built on one idea: the hard
-              part of crowdsourced hazard reporting is not collecting
-              reports. It is deciding which reports describe the
-              <em>same real-world thing</em>.
+              HazardMap is a public-safety map built on the idea that the hard part of crowdsourced hazard reporting is not collecting reports, but it is deciding which reports describe the same real-world thing. (Consult the README for more details.)
             </p>
             <p>
-              Twelve people describing one fallen tree should produce one
-              marker at high confidence, not twelve pins. HazardMap
-              classifies a photo or a sentence, groups reports that describe
-              one event, and scores the result with an explainable
+              Twelve people describing one fallen tree should produce one marker at high confidence, not twelve different pins. 
+              HazardMap classifies a photo or a sentence, groups reports that describe one event, and scores the result with an explainable
               confidence figure.
             </p>
             <p>
-              It is an awareness tool for streets, sidewalks, and public
-              space — fallen trees, flooding, dark signals, road damage,
-              smoke, and similar hazards. It is not an emergency service.
-              Call 911 for emergencies.
+              It is an awareness tool for streets, sidewalks, and public space. 
+              Hazards include fallen trees, flooding, dark signals, road damage, etc.
+              smoke, and similar hazards. Please note that it is not an emergency service, and call 911 for emergencies.
+            </p>
+            <p>
+              The system is open source and free to use. It is not a commercial product.
             </p>
           </article>
         </main>
       </div>
 
       <footer class="footer">
-        <strong>Decision support, not an emergency service.</strong>
-        <span>Call 911 for emergencies. Confidence reflects how many people reported the same thing, not official verification.</span>
+        <strong>HazardMap is a decision support tool, not an emergency service.</strong>
+        <span>Please call 911 for emergencies. High confidence does not mean verification.</span>
         <span class="footer__spacer"></span>
         <button class="footer__link" id="btn-reset-demo" type="button">
           Reset demo data
