@@ -63,14 +63,22 @@ def connect() -> sqlite3.Connection:
     conn.execute("PRAGMA busy_timeout = 10000")
     conn.execute("PRAGMA foreign_keys = ON")
     _local.conn = conn
-    global _schema_ready
-    if not _schema_ready:
-        with _lock:
-            if not _schema_ready:
-                conn.executescript(SCHEMA)
-                conn.commit()
-                _schema_ready = True
+    _ensure_schema(conn)
     return conn
+
+
+def _ensure_schema(conn: sqlite3.Connection) -> None:
+    global _schema_ready
+    if _schema_ready:
+        try:
+            conn.execute("SELECT 1 FROM hazards LIMIT 1")
+            return
+        except sqlite3.OperationalError:
+            _schema_ready = False
+    with _lock:
+        conn.executescript(SCHEMA)
+        conn.commit()
+        _schema_ready = True
 
 
 def ensure_healthy() -> bool:
